@@ -37,11 +37,7 @@ namespace UltimateXR.Animation.IK
 
             if (avatar.AvatarRig.Head.Head == null)
             {
-                if (UxrGlobalSettings.Instance.LogLevelAvatar >= UxrLogLevel.Errors)
-                {
-                    Debug.LogError($"{UxrConstants.AvatarModule} Avatar {avatar.name} has no head setup in the {nameof(UxrAvatar)}'s Rig field");
-                }
-                
+                Debug.LogError($"Avatar {avatar.name} has no head setup in the {nameof(UxrAvatar)}'s Rig field");
                 return;
             }
 
@@ -101,10 +97,7 @@ namespace UltimateXR.Animation.IK
 
             if (_avatarBodyRoot == null)
             {
-                if (UxrGlobalSettings.Instance.LogLevelAvatar >= UxrLogLevel.Warnings)
-                {
-                    Debug.LogWarning($"{UxrConstants.AvatarModule} No common avatar body root found. If there is an avatar body it will not follow the head position.");
-                }
+                Debug.LogWarning("No common avatar body root found. If there is an avatar body it will not follow the head position.");
                 
                 _avatarBodyRoot = new GameObject("Dummy Root").transform;
                 _avatarBodyRoot.SetParent(_avatarTransform);
