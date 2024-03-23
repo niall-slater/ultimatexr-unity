@@ -8,7 +8,6 @@ using UltimateXR.Avatar;
 using UltimateXR.Avatar.Rig;
 using UltimateXR.Core;
 using UltimateXR.Core.Math;
-using UltimateXR.Core.Settings;
 using UltimateXR.Extensions.Unity;
 using UnityEngine;
 
