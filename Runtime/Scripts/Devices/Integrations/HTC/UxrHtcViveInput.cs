@@ -26,7 +26,8 @@ namespace UltimateXR.Devices.Integrations.HTC
                 yield return "Vive. Controller Pro MV";
                 yield return "VIVE Controller MV";
                 yield return "VIVE Controller Pro MV";
-
+                yield return "Vive Controller MV";
+                yield return "Vive Controller Pro MV";
             }
         }
 
