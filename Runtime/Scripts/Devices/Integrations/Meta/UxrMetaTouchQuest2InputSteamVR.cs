@@ -23,6 +23,10 @@ namespace UltimateXR.Devices.Integrations.Meta
             {
                 yield return "Oculus Quest2 (Left Controller)";
                 yield return "Oculus Quest2 (Right Controller)";
+                yield return "Quest 2 Touch - Left";
+                yield return "Quest 2 Touch - Right";
+                yield return "Miramar (Left Controller)";
+                yield return "Miramar (Right Controller)";
             }
         }
 
