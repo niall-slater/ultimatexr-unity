@@ -23,6 +23,7 @@ namespace UltimateXR.Devices.Integrations.HP
             {
                 yield return "HP Reverb G2 Controller";
                 yield return "HP Reverb G2 Controller OpenXR";
+                yield return "WindowsMR: 0x045E/0x065B/0/2";
             }
         }
 
