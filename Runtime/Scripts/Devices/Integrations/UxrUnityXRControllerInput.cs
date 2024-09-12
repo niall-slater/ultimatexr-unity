@@ -391,7 +391,8 @@ namespace UltimateXR.Devices.Integrations
             if (fallback.StartsWith("OpenVR Controller("))
             {
                 fallback = fallback.Replace("OpenVR Controller(", "");
-                fallback = fallback.TrimEnd(')');
+                fallback = fallback.Replace(" - Right", "");
+                fallback = fallback.Replace(" - Left", "");
             }
 
             bool nameFound = ControllerNames.Any(n => string.Equals(n, inputDevice.name));
