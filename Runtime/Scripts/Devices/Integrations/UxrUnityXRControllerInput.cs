@@ -386,22 +386,7 @@ namespace UltimateXR.Devices.Integrations
         private void InputDevices_DeviceConnected(InputDevice inputDevice)
         {
             // Check if device is compatible with component
-            string fallback = inputDevice.name;
-
-            if (fallback.StartsWith("OpenVR Controller("))
-            {
-                fallback = fallback.Replace("OpenVR Controller(", "");
-                fallback = fallback.Replace(") - Right", "");
-                fallback = fallback.Replace(") - Left", "");
-            }
-
-            bool nameFound = ControllerNames.Any(n => string.Equals(n, inputDevice.name));
-            if (!nameFound)
-            {
-                nameFound = ControllerNames.Any(n => string.Equals(n, fallback));
-            }
-
-            if (ForceUseAlways || nameFound)
+            if (ForceUseAlways || ControllerNames.Any(n => string.Equals(n, inputDevice.name)))
             {
                 // Found compatible device. Look for features.
                 List<InputFeatureUsage> listFeatures = new List<InputFeatureUsage>();
