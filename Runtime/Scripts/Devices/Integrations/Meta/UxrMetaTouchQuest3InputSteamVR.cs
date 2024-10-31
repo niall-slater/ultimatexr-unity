@@ -29,6 +29,8 @@ namespace UltimateXR.Devices.Integrations.Meta
                 yield return "Meta Quest Pro (Right Controller)";
                 yield return "Oculus Quest Pro (Left Controller)";
                 yield return "Oculus Quest Pro (Right Controller)";
+                yield return "ventura (Left Controller)";
+                yield return "ventura (Right Controller)";
             }
         }
 
