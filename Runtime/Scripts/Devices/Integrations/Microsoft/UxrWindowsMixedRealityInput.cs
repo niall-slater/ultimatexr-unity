@@ -60,6 +60,8 @@ namespace UltimateXR.Devices.Integrations.Microsoft
             {
                 yield return "Windows MR Controller";
                 yield return "Windows MR Controller OpenXR";
+                yield return "WindowsMR: 0x045E/0x065D/0/1";
+                yield return "WindowsMR: 0x045E/0x065B/0/2";
             }
         }
 
