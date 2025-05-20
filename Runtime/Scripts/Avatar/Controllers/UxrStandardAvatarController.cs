@@ -407,6 +407,18 @@ namespace UltimateXR.Avatar.Controllers
             }
         }
 
+        /// <summary>
+        /// Added by Niall Slater 20/05/2025 to fix body IK freaking out in rotating cockpits far from origin.
+        /// </summary>
+        public void ReinitializeBodyIK()
+        {
+            if (Avatar != null && Avatar.AvatarRigType == UxrAvatarRigType.HalfOrFullBody && _useBodyIK)
+            {
+                _bodyIK = new UxrBodyIK();
+                _bodyIK.Initialize(Avatar, _bodyIKSettings, _useArmIK, _useLegIK);
+            }
+        }
+
         #endregion
 
         #region Event Handling Methods
