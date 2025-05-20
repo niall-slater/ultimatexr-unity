@@ -150,6 +150,11 @@ namespace UltimateXR.Avatar.Controllers
             }
         }
 
+        public UxrBodyIK GetBodyIK()
+        {
+            return _bodyIK;
+        }
+
         /// <summary>
         ///     Gets or sets the arm IK relaxed elbow aperture. The value between range [0.0, 1.0] that determines how tight
         ///     the elbows are to the body.
