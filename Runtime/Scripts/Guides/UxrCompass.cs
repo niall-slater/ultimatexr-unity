@@ -326,7 +326,7 @@ namespace UltimateXR.Guides
         /// <param name="time">Time in seconds the icon has been on screen</param>
         private void UpdateOnScreenIcon(float time)
         {
-            if (UxrAvatar.Local_avatarCamera == null)
+            if (UxrAvatar.LocalAvatarCamera == null)
             {
                 return;
             }
