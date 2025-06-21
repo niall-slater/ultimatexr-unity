@@ -48,6 +48,8 @@ namespace UltimateXR.Guides
         [SerializeField] private Transform    _iconUsePivot;
         [SerializeField] private MeshRenderer _iconUseRenderer;
 
+        private Camera _avatarCamera;
+
         #endregion
 
         #region Public Types & Data
@@ -93,8 +95,12 @@ namespace UltimateXR.Guides
         /// <param name="target">New target or null to stop</param>
         /// <param name="displayMode">The display mode</param>
         /// <param name="iconScale">The icon size multiplier</param>
-        public void SetTarget(Transform target, UxrCompassDisplayMode displayMode = UxrCompassDisplayMode.OnlyCompass, float iconScale = 1.0f)
+        public void SetTarget(Transform target, UxrCompassDisplayMode displayMode = UxrCompassDisplayMode.OnlyCompass, float iconScale = 1.0f, Camera cameraOverride = null)
         {
+            if (cameraOverride != null)
+            {
+                _avatarCamera = cameraOverride;
+            }
             DisplayMode          = displayMode;
             _focusedObjectTarget = target;
             _targetStartTime     = Time.unscaledTime;
@@ -125,8 +131,12 @@ namespace UltimateXR.Guides
         /// <param name="position">The target position</param>
         /// <param name="displayMode">The display mode</param>
         /// <param name="iconScale">The icon size multiplier</param>
-        public void SetTarget(Vector3 position, UxrCompassDisplayMode displayMode = UxrCompassDisplayMode.OnlyCompass, float iconScale = 1.0f)
+        public void SetTarget(Vector3 position, UxrCompassDisplayMode displayMode = UxrCompassDisplayMode.OnlyCompass, float iconScale = 1.0f, Camera cameraOverride = null)
         {
+            if (cameraOverride != null)
+            {
+                _avatarCamera = cameraOverride;
+            }
             DisplayMode          = displayMode;
             _focusedObjectTarget = null;
             _targetStartTime     = Time.unscaledTime;
@@ -212,16 +222,20 @@ namespace UltimateXR.Guides
                     return;
                 }
 
-                Camera  avatarCamera      = UxrAvatar.LocalAvatarCamera;
-                Vector3 targetInCameraPos = avatarCamera.WorldToScreenPoint(TargetPosition);
+                if (_avatarCamera == null)
+                {
+                    _avatarCamera = UxrAvatar.LocalAvatarCamera;
+                }
+
+                Vector3 targetInCameraPos = _avatarCamera.WorldToScreenPoint(TargetPosition);
                 float   percentMargin     = 0.20f;
-                float   marginWidth       = avatarCamera.pixelWidth * percentMargin;
-                float   marginHeight      = avatarCamera.pixelHeight * percentMargin;
+                float   marginWidth       = _avatarCamera.pixelWidth * percentMargin;
+                float   marginHeight      = _avatarCamera.pixelHeight * percentMargin;
 
                 if (targetInCameraPos.x >= marginWidth &&
-                    targetInCameraPos.x <= avatarCamera.pixelWidth - marginWidth &&
+                    targetInCameraPos.x <= _avatarCamera.pixelWidth - marginWidth &&
                     targetInCameraPos.y >= marginHeight &&
-                    targetInCameraPos.y <= avatarCamera.pixelHeight - marginHeight &&
+                    targetInCameraPos.y <= _avatarCamera.pixelHeight - marginHeight &&
                     targetInCameraPos.z > 0.0f)
                 {
                     // Object onscreen
@@ -248,17 +262,17 @@ namespace UltimateXR.Guides
                     _rootOnScreenIcons.gameObject.SetActive(false);
                     _compassArrowPivot.gameObject.SetActive(true);
 
-                    Vector3 direction = avatarCamera.transform.InverseTransformPoint(TargetPosition);
+                    Vector3 direction = _avatarCamera.transform.InverseTransformPoint(TargetPosition);
                     direction.z = 0.0f;
                     direction.Normalize();
-                    direction = new Vector3(targetInCameraPos.x - avatarCamera.pixelWidth * 0.5f, targetInCameraPos.y - avatarCamera.pixelHeight * 0.5f, 0.0f).normalized;
+                    direction = new Vector3(targetInCameraPos.x - _avatarCamera.pixelWidth * 0.5f, targetInCameraPos.y - _avatarCamera.pixelHeight * 0.5f, 0.0f).normalized;
 
                     if (targetInCameraPos.z < 0.0f)
                     {
                         direction = -direction;
                     }
 
-                    _compassArrowPivot.transform.SetPositionAndRotation(avatarCamera.transform.position + avatarCamera.transform.forward * _distanceToCamera, Quaternion.LookRotation(avatarCamera.transform.forward, avatarCamera.transform.TransformDirection(direction)));
+                    _compassArrowPivot.transform.SetPositionAndRotation(_avatarCamera.transform.position + _avatarCamera.transform.forward * _distanceToCamera, Quaternion.LookRotation(_avatarCamera.transform.forward, _avatarCamera.transform.TransformDirection(direction)));
                 }
             }
 
@@ -312,7 +326,7 @@ namespace UltimateXR.Guides
         /// <param name="time">Time in seconds the icon has been on screen</param>
         private void UpdateOnScreenIcon(float time)
         {
-            if (UxrAvatar.LocalAvatarCamera == null)
+            if (UxrAvatar.Local_avatarCamera == null)
             {
                 return;
             }
