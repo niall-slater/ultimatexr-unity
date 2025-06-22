@@ -345,7 +345,7 @@ namespace UltimateXR.UI
             {
                 _lineRenderer.enabled        = IsLaserEnabled && !IsInvisible;
                 _lineRenderer.material.color = laserPointerEventData != null && laserPointerEventData.IsInteractive ? RayColorInteractive : RayColorNonInteractive;
-                AimingAtInteractiveElement = laserPointerEventData.IsInteractive;
+                AimingAtInteractiveElement = laserPointerEventData != null && laserPointerEventData.IsInteractive;
 
                 if (_laserHitRenderer)
                 {

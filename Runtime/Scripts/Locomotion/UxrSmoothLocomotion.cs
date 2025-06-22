@@ -91,6 +91,8 @@ namespace UltimateXR.Locomotion
         /// <inheritdoc />
         public override bool IsSmoothLocomotion => true;
 
+        public bool GroundOnEnable = true;
+
         #endregion
 
         #region Unity
@@ -102,7 +104,10 @@ namespace UltimateXR.Locomotion
         {
             base.OnEnable();
 
-            TryGround();
+            if (GroundOnEnable)
+            {
+                TryGround();
+            }
         }
 
         /// <summary>
