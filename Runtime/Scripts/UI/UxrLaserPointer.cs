@@ -117,7 +117,7 @@ namespace UltimateXR.UI
         /// <summary>
         ///     Returns true if the laser pointer is currently pointing at an interactive UI element.
         /// </summary>
-        public bool AimingAtInteractiveElement {get; private set;}
+        public bool AimingAtInteractiveElement { get; private set; }
 
         /// <summary>
         ///     Gets or sets whether to use the real controller forward instead of the component's forward.
@@ -335,7 +335,7 @@ namespace UltimateXR.UI
             {
                 OptionalEnableWhenLaserOn.SetActive(IsLaserEnabled);
             }
-            AimingAtInteractiveElement = false
+            AimingAtInteractiveElement = false;
 
             // TODO: In order to use UxrLaserPointer for other than Unity UI, the following part should be extracted. 
 
